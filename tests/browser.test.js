@@ -37,6 +37,11 @@ describe('Clicking "Pusha till stacken"', () => {
 
 //Eget test
 test('The stack should have the last element pushed at the top of the stack', async () => {
+    let stack = await driver.findElement(By.id('top_of_stack')).getText();
+    if(stack == "undefinded"){
+        let pop = await driver.findElement(By.id('pop'));
+        pop.click();
+    }
     let push = await driver.findElement(By.id('push'));
     await push.click();
     let alert = await driver.switchTo().alert();
@@ -48,6 +53,6 @@ test('The stack should have the last element pushed at the top of the stack', as
     await alert.accept();
     let peek = await driver.findElement(By.id('peek'));
     await peek.click();
-    let stack = await driver.findElement(By.id('top_of_stack')).getText();
-    expect(stack).toEqual("0");
+    stack = await driver.findElement(By.id('top_of_stack')).getText();
+    expect(stack).toEqual("2");
 })
