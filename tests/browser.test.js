@@ -34,3 +34,20 @@ describe('Clicking "Pusha till stacken"', () => {
         await alert.accept();
     });
 });
+
+//Eget test
+test('The stack should have the last element pushed at the top of the stack', async () => {
+    let push = await driver.findElement(By.id('push'));
+    await push.click();
+    let alert = await driver.switchTo().alert();
+    await alert.sendKeys("1");
+    await alert.accept();
+    await push.click();
+    alert = await driver.switchTo().alert();
+    await alert.sendKeys("2");
+    await alert.accept();
+    let peek = await driver.findElement(By.id('peek'));
+    await peek.click();
+    let stack = await driver.findElement(By.id('top_of_stack')).getText();
+    expect(stack).toEqual("0");
+})
